@@ -14,7 +14,7 @@ public class CreatingUserTest {
     public final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
     private final UserAPI userAPI = new UserAPI();
     private UserSession userSession;
-    private final String email = "test3@aboba.com";
+    private final String email = "test123542534@boba.com";
     private final String name = "boba";
     private final String password = "123test";
 
@@ -29,7 +29,7 @@ public class CreatingUserTest {
     @Description("Verifying successful user creation")
     public void checkSuccessfulCreatingUser() {
 
-        Response response = userAPI.creatingUser(email, name, password);
+        Response response = userAPI.creatingUser(email, password, name);
 
         response
                 .then()
@@ -45,7 +45,7 @@ public class CreatingUserTest {
     @Description("Checking that user already created")
     public void checkAlreadyCreatedUser() {
 
-        Response response = userAPI.creatingUser(email, name, password);
+        Response response = userAPI.creatingUser(email, password, name);
 
         response
                 .then()
@@ -55,7 +55,7 @@ public class CreatingUserTest {
 
         userSession = response.body().as(UserSession.class);
 
-        Response responseSecond = userAPI.creatingUser(email, name, password);
+        Response responseSecond = userAPI.creatingUser(email, password, name);
 
         responseSecond
                 .then()
@@ -69,7 +69,7 @@ public class CreatingUserTest {
     @Description("Checking that the user cannot be created without field")
     public void checkFailureCreatedUser() {
 
-        Response response = userAPI.creatingUser("", name, password);
+        Response response = userAPI.creatingUser("", password, name);
 
         response
                 .then()

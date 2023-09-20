@@ -2,6 +2,8 @@ package diplom_2_classes;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
 import static io.restassured.RestAssured.given;
 
 
@@ -36,9 +38,13 @@ public class UserAPI {
     @Step("Patch user info")
     public Response patchUserInfo(UserSession userSession) {
 
-        return given()
-                .header("Content-type", "application/json")
-                .header("Authorization", userSession.getAccessToken())
+        RequestSpecification requestSpecification = given()
+                .header("Content-type", "application/json");
+        if (userSession.getAccessToken() != null) {
+            requestSpecification
+                    .header("Authorization", userSession.getAccessToken());
+        }
+        return requestSpecification
                 .body(userSession.getUser())
                 .patch(API_AUTH_USER);
     }
@@ -60,14 +66,6 @@ public class UserAPI {
                 .header("Content-type", "application/json")
                 .header("Authorization", userSession.getAccessToken())
                 .delete(API_AUTH_USER);
-    }
-
-    @Step("Creating user session")
-    public UserSession creatingUserSession(Response response, String password) {
-
-        UserSession userSession = response.body().as(UserSession.class);
-        userSession.getUser().setPassword(password);
-        return userSession;
     }
 
 }

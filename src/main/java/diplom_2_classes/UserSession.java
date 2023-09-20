@@ -38,4 +38,8 @@ public class UserSession {
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
+
+    public UserSession noAuth(){
+        return new UserSession(this.user, null, null);
+    }
 }
