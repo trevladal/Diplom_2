@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.equalTo;
 
 public class UserAuthorizationTest {
-    public final static String BASE_URI = "https://stellarburgers.nomoreparties.site";
+    private final static String BASE_URI = "https://stellarburgers.nomoreparties.site";
     private final UserAPI userAPI = new UserAPI();
     private UserSession userSession;
 

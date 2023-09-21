@@ -11,10 +11,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class GetUserOrdersTest {
-    public final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
-    OrderAPI orderAPI = new OrderAPI();
-    UserAPI userAPI = new UserAPI();
-    IngredientsAPI ingredientsAPI = new IngredientsAPI();
+    private final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
+    private OrderAPI orderAPI = new OrderAPI();
+    private UserAPI userAPI = new UserAPI();
+    private IngredientsAPI ingredientsAPI = new IngredientsAPI();
     private UserSession userSession;
 
     private final String email = "testUser123@aboba.com";

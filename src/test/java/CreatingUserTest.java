@@ -11,7 +11,7 @@ import diplom_2_classes.UserAPI;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreatingUserTest {
-    public final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
+    private final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
     private final UserAPI userAPI = new UserAPI();
     private UserSession userSession;
     private final String email = "test123542534@boba.com";

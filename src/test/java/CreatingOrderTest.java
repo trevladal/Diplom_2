@@ -5,14 +5,15 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import static org.hamcrest.Matchers.equalTo;
 
 public class CreatingOrderTest {
 
-    UserAPI userAPI = new UserAPI();
-    OrderAPI orderAPI = new OrderAPI();
-    IngredientsAPI ingredientsAPI = new IngredientsAPI();
+    private UserAPI userAPI = new UserAPI();
+    private OrderAPI orderAPI = new OrderAPI();
+    private IngredientsAPI ingredientsAPI = new IngredientsAPI();
 
     private UserSession userSession;
     private final String email = "test1234@boba.com";
@@ -47,7 +48,12 @@ public class CreatingOrderTest {
 
         Response responseCreatingOrder = orderAPI.creatingOrder(order, userSession);
 
-        responseCreatingOrder.then().assertThat().statusCode(200);
+
+        responseCreatingOrder
+                .then()
+                .assertThat()
+                .body("success", equalTo(true))
+                .statusCode(200);
 
     }
 
@@ -77,9 +83,12 @@ public class CreatingOrderTest {
 
         Response responseCreatingOrder = orderAPI.creatingOrder(order, userSession.noAuth());
 
-
-        responseCreatingOrder.then().assertThat().statusCode(401);
-
+        //ЭТО ОЖИДАЕМЫЙ РЕЗУЛЬТАТ, НО ЕГО НЕТ, Т.К. В ПРИЛОЖЕНИИ БАГ, КАК СКАЗАЛ НАСТАВНИК (см. коммент выше)
+        responseCreatingOrder
+                .then()
+                .assertThat()
+                .body("success", equalTo(false))
+                .statusCode(401);
     }
     @Test
     @DisplayName("Failure creating order without ingredients")
@@ -98,8 +107,11 @@ public class CreatingOrderTest {
 
         Response responseCreatingOrder = orderAPI.creatingOrder(order, userSession);
 
-        responseCreatingOrder.then().assertThat().statusCode(400);
-
+        responseCreatingOrder
+                .then()
+                .assertThat()
+                .body("success", equalTo(false))
+                .statusCode(400);
     }
 
     @Test

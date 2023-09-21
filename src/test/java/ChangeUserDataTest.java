@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 
 public class ChangeUserDataTest {
-    public final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
+    private final static String BASE_URI =  "https://stellarburgers.nomoreparties.site";
     private final UserAPI userAPI = new UserAPI();
     private UserSession userSession;
 

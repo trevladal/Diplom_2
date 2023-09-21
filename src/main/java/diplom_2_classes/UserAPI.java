@@ -30,7 +30,6 @@ public class UserAPI {
 
         return given()
                 .header("Content-type", "application/json")
-                .header("Authorization", userSession.getAccessToken())
                 .body(authRequest)
                 .post(API_AUTH_LOGIN);
 
@@ -47,16 +46,6 @@ public class UserAPI {
         return requestSpecification
                 .body(userSession.getUser())
                 .patch(API_AUTH_USER);
-    }
-
-
-    @Step("Get user info")
-    public Response getUserInfo(UserSession userSession) {
-
-        return given()
-                .header("Content-type", "application/json")
-                .header("Authorization", userSession.getAccessToken())
-                .get(API_AUTH_USER);
     }
 
     @Step("Deleting user")
